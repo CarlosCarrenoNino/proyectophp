@@ -295,7 +295,7 @@
                                                                     
                 
                                                                 /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                                $informe = "SELECT SUM(".$cp['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio'  AND '$fechaFinal'";
+                                                                $informe = "SELECT SUM(".$cp['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio'  AND '$fechaFinal'";
                                                                 //echo $informe;
                                                                 $consulinforme=odbc_exec($conexion, $informe);
                                                                 $campo = odbc_result($consulinforme, 'resultado');
@@ -476,7 +476,7 @@
                                                             $Meses1 = $mesregi['CODMES'];
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe2 = "SELECT SUM(".$cp2['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
+                                                        $informe2 = "SELECT SUM(".$cp2['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
             
                                                         $consulinforme2=odbc_exec($conexion, $informe2);
             
@@ -770,7 +770,7 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe3 = "SELECT SUM(".$cp3['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaFinal'";
+                                                        $informe3 = "SELECT SUM(".$cp3['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaFinal'";
             
                                                         //echo $informe;
                                                         $consulinforme3=odbc_exec($conexion, $informe3);
@@ -1172,7 +1172,7 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe4 = "SELECT SUM(".$cp4['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaFinal'";
+                                                        $informe4 = "SELECT SUM(".$cp4['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaFinal'";
             
                                                         //echo $informe;
                                                         $consulinforme4=odbc_exec($conexion, $informe4);
@@ -1423,7 +1423,7 @@
                                                             $Meses1 = $mesregi['CODMES']; 
 
                                                         //$informe5 = "EXEC [SPR_GET_TONELADAS] '$periodo','$Meses'"; 
-                                                        $informe5 =" SELECT SUM(".$cp5['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND  '$fechaFinal'";
+                                                        $informe5 =" SELECT SUM(".$cp5['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ2 WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND  '$fechaFinal'";
             
                                                         //echo $informe5;
                                                         $consulinforme5=odbc_exec($conexion, $informe5);
@@ -1657,8 +1657,8 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe6 = "SELECT SUM(".$cp6['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD
-                                                        INNER JOIN DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
+                                                        $informe6 = "SELECT SUM(".$cp6['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD
+                                                        INNER JOIN DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
                                                         JD.INF_D_MES = JD2.INF_D_MES WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
             
                                                         //echo $informe;
@@ -1889,8 +1889,8 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe7 = "SELECT SUM(".$cp7['campo'].") AS resultado FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD
-                                                        INNER JOIN DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
+                                                        $informe7 = "SELECT SUM(".$cp7['campo'].") AS resultado FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD
+                                                        INNER JOIN DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
                                                         JD.INF_D_MES = JD2.INF_D_MES WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'"; 
                                                         //echo $informe;
                                                         $consulinforme7=odbc_exec($conexion, $informe7);
@@ -2188,8 +2188,8 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe8 = "SELECT SUM(".$cp8['campo'].") AS resultado FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD
-                                                        INNER JOIN DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
+                                                        $informe8 = "SELECT SUM(".$cp8['campo'].") AS resultado FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD
+                                                        INNER JOIN DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
                                                         JD.INF_D_MES = JD2.INF_D_MES WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
                                                         //echo $informe;
                                                         $consulinforme8=odbc_exec($conexion, $informe8);
@@ -2651,8 +2651,8 @@
             
             
                                                         /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                        $informe9 = "SELECT SUM(".$cp9['campo'].") AS resultado FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD
-                                                        INNER JOIN DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
+                                                        $informe9 = "SELECT SUM(".$cp9['campo'].") AS resultado FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD
+                                                        INNER JOIN DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 ON JD.INF_D_FECHAS = JD2.INF_D_FECHAS AND JD.INF_D_ANIO = JD2.INF_D_ANIO AND 
                                                         JD.INF_D_MES = JD2.INF_D_MES WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
                                                         //echo $informe;
                                                         $consulinforme9=odbc_exec($conexion, $informe9);
@@ -2968,7 +2968,7 @@
                                                                         
 
                                                                     /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                                    $informe = "SELECT SUM(".$cp['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio'  AND '$fechaInicio'";
+                                                                    $informe = "SELECT SUM(".$cp['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio'  AND '$fechaInicio'";
                                                                     //echo $informe;
                                                                     $consulinforme=odbc_exec($conexion, $informe);
                                                                     $campo = odbc_result($consulinforme, 'resultado');
@@ -3149,7 +3149,7 @@
                                                                 $Meses1 = $mesregi['CODMES'];
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe2 = "SELECT SUM(".$cp2['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe2 = "SELECT SUM(".$cp2['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaInicio'";
 
                                                             $consulinforme2=odbc_exec($conexion, $informe2);
 
@@ -3443,7 +3443,7 @@
                 
                 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe3 = "SELECT SUM(".$cp3['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe3 = "SELECT SUM(".$cp3['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
                 
                                                             //echo $informe;
                                                             $consulinforme3=odbc_exec($conexion, $informe3);
@@ -3845,7 +3845,7 @@
 
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe4 = "SELECT SUM(".$cp4['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe4 = "SELECT SUM(".$cp4['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
 
                                                             //echo $informe;
                                                             $consulinforme4=odbc_exec($conexion, $informe4);
@@ -4096,7 +4096,7 @@
                                                                 $Meses1 = $mesregi['CODMES']; 
 
                                                             //$informe5 = "EXEC [SPR_GET_TONELADAS] '$periodo','$Meses'"; 
-                                                            $informe5 =" SELECT SUM(".$cp5['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND  '$fechaInicio'";
+                                                            $informe5 =" SELECT SUM(".$cp5['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ2 WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND  '$fechaInicio'";
 
                                                             //echo $informe5;
                                                             $consulinforme5=odbc_exec($conexion, $informe5);
@@ -4331,7 +4331,7 @@
 
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe6 = "SELECT SUM(".$cp6['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaInicio'  AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' ";
+                                                            $informe6 = "SELECT SUM(".$cp6['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaInicio'  AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' ";
 
                                                             //echo $informe;
                                                             $consulinforme6=odbc_exec($conexion, $informe6);
@@ -4561,7 +4561,7 @@
 
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe7 = "SELECT SUM(".$cp7['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe7 = "SELECT SUM(".$cp7['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
 
                                                             //echo $informe;
                                                             $consulinforme7=odbc_exec($conexion, $informe7);
@@ -4859,7 +4859,7 @@
 
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe8 = "SELECT SUM(".$cp8['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe8 = "SELECT SUM(".$cp8['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
 
                                                             //echo $informe;
                                                             $consulinforme8=odbc_exec($conexion, $informe8);
@@ -5321,7 +5321,7 @@
 
 
                                                             /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
-                                                            $informe9 = "SELECT SUM(".$cp9['campo'].") AS resultado  FROM DUQUESA2021..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA2021..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
+                                                            $informe9 = "SELECT SUM(".$cp9['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ AS JD, DUQUESA..TBL_RINFORME_JUNTA_DUQ2 AS JD2 WHERE JD.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio' AND JD2.INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaInicio'";
 
                                                             //echo $informe;
                                                             $consulinforme9=odbc_exec($conexion, $informe9);
@@ -5564,7 +5564,7 @@
                                         <?php
 
                                         $partidura ="SELECT PAR_NID, PAR_CPARTIDURA, PAR_CCANTIDAD, PAR_D_FECHA_REGISTRO, PAR_CESTADO
-                                        FROM DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_DFECHA)= YEAR(GETDATE()) AND 
+                                        FROM DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_DFECHA)= YEAR(GETDATE()) AND 
                                         MONTH(PAR_DFECHA) = MONTH(GETDATE()) AND PAR_CESTADO = 1 ORDER BY PAR_CPARTIDURA ";
 
                                         $consulpartidura=odbc_exec($conexion, $partidura);
@@ -5699,11 +5699,11 @@
                                         <?php
 
                                         $partidura ="SELECT PAR_NID, PAR_CPARTIDURA, PAR_CCANTIDAD, PAR_D_FECHA_REGISTRO, PAR_CESTADO,PAR_DFECHA
-                                        FROM DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ WHERE  PAR_CESTADO = 1 AND (PAR_DFECHA) between 
+                                        FROM DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ WHERE  PAR_CESTADO = 1 AND (PAR_DFECHA) between 
                                         '$InicioFE'  AND  '$FinalFE' ORDER BY PAR_DFECHA ";
 
                                         /* $partidura ="SELECT PAR_NID, PAR_CPARTIDURA, PAR_CCANTIDAD, PAR_D_FECHA_REGISTRO, PAR_CESTADO
-                                        FROM DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_D_FECHA_REGISTRO)= YEAR(GETDATE()) AND 
+                                        FROM DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_D_FECHA_REGISTRO)= YEAR(GETDATE()) AND 
                                         MONTH(PAR_D_FECHA_REGISTRO) = MONTH(GETDATE()) AND PAR_CESTADO = 1 ORDER BY PAR_CPARTIDURA "; */
 
                                         $consulpartidura=odbc_exec($conexion, $partidura);

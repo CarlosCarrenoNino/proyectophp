@@ -18,7 +18,7 @@
         $id = $_POST['id_nuevo'];
         
         
-        $query = "SELECT * FROM DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ WHERE PAR_NID = $id";
+        $query = "SELECT * FROM DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ WHERE PAR_NID = $id";
         $result= odbc_exec($conexion, $query);
     
         while($row = odbc_fetch_array($result)){
@@ -57,7 +57,7 @@
         //echo 'esta es la nueva cantidad: '.$newcanti; 
         //echo 'usuario update'.$usuario;
 
-        $query = "UPDATE DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ SET PAR_CESTADO=0, 
+        $query = "UPDATE DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ SET PAR_CESTADO=0, 
          PAR_D_FECHA_REGISTRO_UPDATE = '$fechaHoy', PAR_DHORA_REGISTRO_UPDATE= '$horaHoy',
          PAR_CUSUARIO_UPDATE = '$usuario' WHERE PAR_NID ='$id'";
 
@@ -72,7 +72,7 @@
 
         //echo 'usuario nuevo'.$usuario;
         
-        $sqlquery ="INSERT INTO DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ (PAR_CPARTIDURA, PAR_CCANTIDAD,
+        $sqlquery ="INSERT INTO DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ (PAR_CPARTIDURA, PAR_CCANTIDAD,
         PAR_D_FECHA_REGISTRO, PAR_DHORA_REGISTRO, PAR_DANIO, PAR_DMES, PAR_DFECHA, PAR_CUSUARIO_REGISTRO,
         PAR_CESTADO) VALUES ('$PAR_CPARTIDURA', $newcanti, '$fechaHoy', '$horaHoy', '$anioHoy', 
         '$PAR_DMES', '$PAR_DFECHA', '$usuario', '1')";

@@ -266,7 +266,7 @@
                                         <?php
 
                                         $partidura ="SELECT PAR_NID, PAR_CPARTIDURA, PAR_CCANTIDAD, PAR_D_FECHA_REGISTRO, PAR_CESTADO
-                                        FROM DUQUESA2021..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_D_FECHA_REGISTRO)= YEAR(GETDATE()) AND 
+                                        FROM DUQUESA..TBL_RPARTIDURAS_JUNTA_DUQ WHERE YEAR(PAR_D_FECHA_REGISTRO)= YEAR(GETDATE()) AND 
                                         MONTH(PAR_D_FECHA_REGISTRO) = MONTH(GETDATE()) AND PAR_CESTADO = 1";
 
                                         $consulpartidura=odbc_exec($conexion, $partidura);
