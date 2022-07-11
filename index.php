@@ -63,8 +63,17 @@
         <title>Informe Junta Directiva Duquesa</title>
         <link rel="icon" href="img/duquesa.ico" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
+
+        
+        
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-danger">
@@ -158,37 +167,52 @@
                         <div class="card-body" style="margin-top: -30px" >
                             
                             <div class="row">
+                                
                                 <div class="col-lg-12 col-md-12 col-sm-4 col-xs-12">
+                                    
                                     <div class="form-group">
                                         
                                         <form action="#" method="POST">
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="" style="margin-left: -17px;" ><b>Fecha Inicio: <?php echo $inicio; ?></b></label><br><br>                                                    
-                                                    <input required type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeInicio" id="fechainformeInicio1" style="margin-left: -17px;" >
+                                                <div class="col-md-2">
+                                                    <label for="" style="margin-left: -17px; width: 200px;" ><b>Fecha Inicio: <?php echo $inicio; ?></b></label><br><br>                                                    
+                                                    <input  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeInicio" id="fechainformeInicio1" style="margin-left: -17px; width: 200px;" >
                                                 </div> 
                                                 
-                                                <div class="col-md-3">
-                                                    <label for="" style="margin-left: -8px;" ><b>Fecha Fin: <?php echo $final; ?></b></label><br><br>
-                                                    <input  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeFin" id="fechainformeFin1" style="margin-left: -8px;" >
+                                                <div class="col-md-2">
+                                                    <label for="" style="margin-left: -8px; width: 200px;" ><b>Fecha Fin: <?php echo $final; ?></b></label><br><br>
+                                                    <input  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeFin" id="fechainformeFin1" style="margin-left: -8px; width:200px;" >
                                                 </div> 
                                                 <div class="col-md-3">
                                                     <label for="" ><b>Filtrar por</b></label><br><br>
-                                                    <select required list="SelectFiltro"  name="SelectFiltro" id="SelectFiltro" class="form-control" >
+                                                    <select  list="SelectFiltro"  name="SelectFiltro" id="SelectFiltro" class="form-control" >
                                                         <option value="">Seleccione una Opción</option>
                                                         <option value="Mes_Acumulado">Acumulado Ejecutado</option>
                                                         <option value="Mes_a_Mes">Mes Ejecutado</option>
                                                     
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <button type="submit" class="btn btn-danger"  name="enviar" id="enviar1" style="margin-block-start: 47px; margin-left: 8px;">
+                                                <div class="col-md-2">
+                                                    <button type="submit" class="btn btn-danger"  name="enviar" id="enviar1" style="margin-block-start: 47px; margin-left: -10px;">
                                                     
                                                     <b>Consultar</b></button>
 
                                                 </div>
+
+                                                
+                                                
                                             </div> 
                                         </form>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <button type="submit" class="btn btn-danger" id="informe" onclick="exportTableToExcel('infoDuq','infoDuq1','infoduq2','Informe_Junta_Directiva_Duquesa')" style="margin-block-start: -72px; margin-left: 960px; width: 260px;">
+                                                
+                                                <b>Descargar Informe JD Duquesa</b></button>
+
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -220,11 +244,11 @@
                                 <?php
                                 if($estadosConsulta == 1){?>
                                 <div class="table-responsive">
-                                    <table id="" border="1"  class="table  table-hover" >
+                                    <table border="1"  class="table m-b-0 table-hover" >
                                         <thead class="thead-color">
                                             <tr>
                                                 
-                                                <th style="text-align: center; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px;"> CONCEPTO </th>
+                                                <th style="text-align: center; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px;">CONCEPTO</th>
                                                 <?php
                                                 
                                                     foreach($rangofech as $rangomeses){
@@ -239,7 +263,7 @@
 
                                                             $anio = substr($fechaInicio,0,4);
 
-                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7; ">
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;  ">
                                                             '.NombreMeses($mes).' '.$anio.' </th>'; 
 
                                                         }else{
@@ -255,8 +279,169 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px background:#E6B8B7;  ; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px background:#E6B8B7; ; ">PROMEDIO</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody >
+
+                                                
+
+                                                <?php
+                                                
+
+                                                            
+                                                foreach(Cuerpo() as $cp){
+
+                                                    if($cp['ID']<=9){
+
+                                                        
+                                                                                                                                                            
+
+                                                        echo '<tr>
+                                                                <td style="text-align: left; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px; background:white; ">'.$cp['Concep'].'</td>
+                                                                ';
+
+                                                        
+                                                            $sumaAcumul=0;
+                                                            $sumaTri=0;
+
+                                                            
+                                                            foreach($rangofech as $mesregi){
+
+
+                
+                                                                $fechaInicio = $mesregi['FechaI'];
+                                                                $fechaFinal = $mesregi['FechaF'];
+                                                                $Meses1 = $mesregi['CODMES'];
+                                                                    
+                
+                                                                /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
+                                                                $informe = "SELECT SUM(".$cp['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio'  AND '$fechaFinal'";
+                                                                //echo $informe;
+                                                                $consulinforme=odbc_exec($conexion, $informe);
+                                                                $campo = odbc_result($consulinforme, 'resultado');
+                                                            
+                                                                if($fechaInicio == $fechaFinal){
+
+                                                                    $sumaAcumul = $sumaAcumul + $campo;
+
+                                                                }
+                                                                
+                                                                
+
+                                                                    if($cp['ID']==4 && $cp['campo']=='(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)'){
+        
+                                                                    
+                                                                        echo '<td  style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
+                                                                        
+                                                                    }elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
+                                                                        
+                                                                        echo '<td  style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
+            
+                                                                    }elseif($cp['ID']==9 && $cp['campo']=='((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))'){
+                                                                        
+                                                                        echo '<td  style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
+            
+                                                                    }
+
+
+                                                                    if($cp['ID']!=4 && $cp['ID']!=8 && $cp['ID']!=9) {
+                                                                    
+                                                                        echo '<td  style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';    
+            
+                                                                    }
+                                                                
+                                                            }                                                                                   
+        
+        
+                                                            if($sumaAcumul == 0){
+        
+                                                                $promedio = 0;
+                                                            }else{
+        
+                                                                $promedio = $sumaAcumul / count($rangofech);
+                                                            }
+
+                                                                
+                                                            if($cp['ID']==4 && $cp['campo']=='(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)'){
+                                                                
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;">$'.number_format($sumaAcumul,0).'</td>';
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+
+                                                            }elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
+        
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul,0).'</td>';
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+        
+                                                            }elseif($cp['ID']==9 && $cp['campo']=='((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))'){
+                                                                
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul,0).'</td>';
+                                                                echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+        
+                                                            }
+        
+        
+                                                            if($cp['ID']!=4 && $cp['ID']!=8 && $cp['ID']!=9) {
+        
+                                                                echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;">$'.number_format($sumaAcumul,0).'</td>';
+                                                                echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;">$'.number_format($promedio,0).'</td>';
+        
+                                                            }
+                
+
+                                                        echo'</tr>';
+                                                        
+                                                    }
+
+                                                    
+
+                                                }
+                                                ?>
+
+                                                                                        
+                                            
+                                        </tbody>
+                                    </table>
+                                    <table hidden="hidden" id="infoDuq" border="1"  class="table m-b-0 table-hover" >
+                                        <thead class="thead-color">
+                                            <tr>
+                                                
+                                                <th style="text-align: center; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px;">CONCEPTO</th>
+                                                <?php
+                                                
+                                                    foreach($rangofech as $rangomeses){
+
+                                                        $fechaInicio = $rangomeses['FechaI'];
+                                                        $fechaFinal = $rangomeses['FechaF'];
+                                                        $trimes = 'TRIMESTRE';
+
+                                                        if($fechaInicio == $fechaFinal){
+
+                                                            $mes = substr($fechaInicio,5,2);
+
+                                                            $anio = substr($fechaInicio,0,4);
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px;  ">
+                                                            '.NombreMeses($mes).' '.$anio.' </th>'; 
+
+                                                        }else{
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">
+                                                            '.$trimes.' </th>'; 
+
+                                                        }
+                                                        
+                                                    
+                                                    }
+                                                    
+                                                
+                                                ?>
+                                            
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -395,7 +580,7 @@
                         <div class="card mb-4">
                             
 
-                             <div class="card-header sb-sidenav-collapse-arrow" href="#" data-bs-toggle="collapse" data-bs-target="#CostosVentas" aria-expanded="false" aria-controls="collapseLayouts">
+                             <div id="VentasNetas" class="card-header sb-sidenav-collapse-arrow" href="#" data-bs-toggle="collapse" data-bs-target="#CostosVentas" aria-expanded="false" aria-controls="collapseLayouts">
                                 <i class="fas fa-university"></i>
                                 <b>COSTOS DE VENTAS <?php echo $anioHoy; ?></b>
                                 <i class="fas fa-angle-down"></i>
@@ -408,7 +593,7 @@
                                 <?php
                                 if($estadosConsulta == 1){?>
                                 <div class="table-responsive">
-                                    <table id="" border="1" class="table m-b-0 table-hover" >
+                                    <table  border="1" class="table m-b-0 table-hover" >
                                         <thead class="thead-color">
                                             <tr>
                                                 
@@ -426,12 +611,12 @@
 
                                                             $anio = substr($fechaInicio,0,4);
 
-                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7 ">
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">
                                                             '.NombreMeses($mes).' '.$anio.' </th>'; 
 
                                                         }else{
 
-                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7">
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7;">
                                                             '.$trimes.' </th>'; 
 
                                                         }
@@ -441,8 +626,272 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">PROMEDIO</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody >
+
+                                                
+
+                                                <?php
+                                                
+                                                
+                                                foreach(Cuerpo() as $cp2){
+
+                                                    if($cp2['ID'] >= 10 && $cp2['ID'] <= 29){
+
+                                                        $sumaAcumul2=0;
+                                                        $sumaTri2=0;
+
+                                                    
+
+                                                        echo '<tr>
+                                                                <td style="text-align: left; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px; background:white; ">'.$cp2['Concep'].'</td>
+                                                                ';
+
+
+                                                        foreach($rangofech as $mesregi){
+                                                        
+
+                                                            $fechaInicio = $mesregi['FechaI'];
+                                                            $fechaFinal = $mesregi['FechaF'];
+                                                            $Meses1 = $mesregi['CODMES'];
+            
+                                                        /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
+                                                        $informe2 = "SELECT SUM(".$cp2['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS  BETWEEN '$fechaInicio' AND '$fechaFinal'";
+            
+                                                        $consulinforme2=odbc_exec($conexion, $informe2);
+            
+                                                        $campos2 = odbc_result($consulinforme2, 'resultado');
+                                                    
+                                                        if($fechaInicio == $fechaFinal){
+
+                                                            $sumaAcumul2 = $sumaAcumul2 + $campos2;
+
+                                                        }
+
+
+                                                        if($cp2['ID']==16 && $cp2['campo']=='(ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)'){
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($campos2,0).'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==24 && $cp2['campo']=='(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($campos2,0).'</td>';
+
+                                                        }elseif($cp2['ID']==26 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))'){
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($campos2,0).'</td>';
+
+                                                        }elseif ($cp2['ID']==28 && $cp2['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($campos2,0).'</td>';
+
+                                                        }elseif($cp2['ID']==11 && $cp2['campo']=='((ACEITES2/ACEITES)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;">'.number_format($campos2,1).'%'.'</td>';
+
+                                                        }elseif($cp2['ID']==13 && $cp2['campo']=='((MARGARINAS2/MARGARINAS)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">'.number_format($campos2,1).'%'.'</td>';
+                                                        
+                                                        }elseif($cp2['ID']==15 && $cp2['campo']=='((SOLIDOS_CREMOSOS2/SOLIDOS_CREMOSOS)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==17 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)/(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==19 && $cp2['campo']=='(INDUSTRIALES2/INDUSTRIALES)*100'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==21 && $cp2['campo']=='((ACIDOS_GRASOS_ACIDULADO2/ACIDOS_GRASOS_ACIDULADO)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==23 && $cp2['campo']=='((SERVICIO_MAQUILA2/SERVICIO_MAQUILA)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==25 && $cp2['campo']=='((INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)/(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==27 && $cp2['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==29 && $cp2['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($campos2,1).'%'.'</td>';
+                                                            
+                                                        }
+                                                        
+
+                                                        
+                                                        
+                                                        if($cp2['ID']!=16 && $cp2['ID']!=24 && $cp2['ID']!=26 && $cp2['ID']!=28 && $cp2['ID']!=11 && $cp2['ID']!=13 && $cp2['ID']!=15 && $cp2['ID']!=17 && $cp2['ID']!=19 && $cp2['ID']!=21 && $cp2['ID']!=23 && $cp2['ID']!=25 && $cp2['ID']!=27 && $cp2['ID']!=29 ) {
+
+                                                            echo '<td id="fecha" style="text-align: right; style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;">$'.number_format($campos2,0).'</td>';    
+
+                                                        } 
+
+
+                                                        }                                                                                   
+
+
+
+                                                        if($sumaAcumul2 == 0){
+
+                                                            $promedio = 0;
+                                                        }else{
+
+                                                            $promedio = $sumaAcumul2 / count($rangofech);
+                                                        }
+
+                                                        if($cp2['ID']==16 && $cp2['campo']=='(ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)'){
+                                                            
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==24 && $cp2['campo']=='(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)'){
+
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+
+                                                        }elseif($cp2['ID']==26 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))'){
+                                                            
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+
+                                                        }elseif ($cp2['ID']==28 && $cp2['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))') {
+                                                            
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+
+                                                        }elseif($cp2['ID']==11 && $cp2['campo']=='((ACEITES2/ACEITES)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+
+                                                        }elseif($cp2['ID']==13 && $cp2['campo']=='((MARGARINAS2/MARGARINAS)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                        
+                                                        }elseif($cp2['ID']==15 && $cp2['campo']=='((SOLIDOS_CREMOSOS2/SOLIDOS_CREMOSOS)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==17 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)/(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==19 && $cp2['campo']=='(INDUSTRIALES2/INDUSTRIALES)*100'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==21 && $cp2['campo']=='((ACIDOS_GRASOS_ACIDULADO2/ACIDOS_GRASOS_ACIDULADO)*100)'){
+                                                            
+                                                        
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==23 && $cp2['campo']=='((SERVICIO_MAQUILA2/SERVICIO_MAQUILA)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==25 && $cp2['campo']=='((INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)/(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==27 && $cp2['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }elseif($cp2['ID']==29 && $cp2['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            
+                                                        }
+
+                                                        if($cp2['ID']!=16 && $cp2['ID']!=24 && $cp2['ID']!=26 && $cp2['ID']!=28 && $cp2['ID']!=11 && $cp2['ID']!=13 && $cp2['ID']!=15 && $cp2['ID']!=17 && $cp2['ID']!=19 && $cp2['ID']!=21 && $cp2['ID']!=23 && $cp2['ID']!=25 && $cp2['ID']!=27 && $cp2['ID']!=29){
+                                                            
+                                                            
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($sumaAcumul2,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            
+                                                        } 
+            
+                                                        echo'</tr>';
+
+                                                    }
+
+                                                    
+
+                                                }
+                                                ?>
+
+                                                                                        
+                                            
+                                        </tbody>
+                                    </table>
+                                    <table hidden="hidden" id="infoDuq1" border="1" class="table m-b-0 table-hover" >
+                                        <thead class="thead-color">
+                                            <tr>
+                                                
+                                                <th style="text-align: center; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px;"> CONCEPTO </th>
+                                                <?php
+                                                foreach($rangofech as $rangomeses){
+
+                                                        $fechaInicio = $rangomeses['FechaI'];
+                                                        $fechaFinal = $rangomeses['FechaF'];
+                                                        $trimes = 'TRIMESTRE';
+
+                                                        if($fechaInicio == $fechaFinal){
+
+                                                            $mes = substr($fechaInicio,5,2);
+
+                                                            $anio = substr($fechaInicio,0,4);
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">
+                                                            '.NombreMeses($mes).' '.$anio.' </th>'; 
+
+                                                        }else{
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px;">
+                                                            '.$trimes.' </th>'; 
+
+                                                        }
+
+                                                
+                                                }
+                                                
+                                                ?>
+                                            
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -699,7 +1148,7 @@
                                 <?php
                                 if($estadosConsulta == 1){?>
                                 <div class="table-responsive">
-                                    <table id="" border="1" class="table m-b-0 table-hover" >
+                                    <table border="1" class="table m-b-0 table-hover" >
                                         <thead class="thead-color">
                                             <tr>
                                                 
@@ -733,6 +1182,381 @@
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">ACUMULADO</th>
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody >
+
+                                                
+
+                                                <?php
+                                                
+                                                
+                                                foreach(Cuerpo() as $cp3){
+
+                                                    if($cp3['ID'] >= 30 && $cp3['ID'] <= 63){
+
+                                                        $sumaAcumul3=0;
+                                                        $TotalTri=0;
+
+                                                        
+                                                        
+
+                                                        echo '<tr>
+                                                                <td style="text-align: left; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px; background:white; ">'.$cp3['Concep'].'</td>
+                                                                ';
+
+
+                                                        foreach($rangofech as $mesregi){
+                                                        
+
+                                                            $fechaInicio = $mesregi['FechaI'];
+                                                            $fechaFinal = $mesregi['FechaF'];
+                                                            $Meses1 = $mesregi['CODMES'];
+                                                            
+            
+            
+            
+                                                        /* $informe = "EXEC [SPR_GET_VENTAS_NETAS] '$periodo','$Meses','$N1','$N2'"; */
+                                                        $informe3 = "SELECT SUM(".$cp3['campo'].") AS resultado  FROM DUQUESA..TBL_RINFORME_JUNTA_DUQ WHERE INF_D_FECHAS BETWEEN '$fechaInicio' AND '$fechaFinal'";
+            
+                                                        //echo $informe;
+                                                        $consulinforme3=odbc_exec($conexion, $informe3);
+            
+                                                        $campos3 = odbc_result($consulinforme3, 'resultado');
+
+                                                        if($fechaInicio == $fechaFinal){
+
+                                                            $sumaAcumul3 = $sumaAcumul3 + $campos3;
+
+                                                        }
+                                                        
+
+                                                        if($cp3['ID']==30 && $cp3['campo']=='GASTOS_ADMINISTRACION'){
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                            
+                                                        }elseif($cp3['ID']==40 && $cp3['campo']=='GASTOS_VENTAS'){
+
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+
+                                                        }elseif($cp3['ID']==58 && $cp3['campo']=='DEPRECIACIONES_AMORTIZACIONES'){
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+
+                                                        }elseif ($cp3['ID']==60 && $cp3['campo']=='(GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==62 && $cp3['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+
+                                                        }elseif ($cp3['ID']==31 && $cp3['campo']=='(GASTOS_ADMINISTRACION/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==32 && $cp3['campo']=='GASTOS_PERSONAL') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==34 && $cp3['campo']=='HONORARIOS') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==33 && $cp3['campo']=='(GASTOS_PERSONAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==35 && $cp3['campo']=='(HONORARIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100/)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==36 && $cp3['campo']=='SERVICIOS') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==37 && $cp3['campo']=='(SERVICIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==38 && $cp3['campo']=='(GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==39 && $cp3['campo']=='(OTROS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==41 && $cp3['campo']=='(GASTOS_VENTAS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==42 && $cp3['campo']=='GASTOS_PERSONAL2') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==43 && $cp3['campo']=='(GASTOS_PERSONAL2/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==44 && $cp3['campo']=='POLIZA_CARTERA') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==45 && $cp3['campo']=='(POLIZA_CARTERA/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==46 && $cp3['campo']=='FLETES') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==47 && $cp3['campo']=='(FLETES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==48 && $cp3['campo']=='SERVICIO_LOGISTICO') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==49 && $cp3['campo']=='(SERVICIO_LOGISTICO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==50 && $cp3['campo']=='ESTRATEGIA_COMERCIAL') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==51 && $cp3['campo']=='(ESTRATEGIA_COMERCIAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==52 && $cp3['campo']=='IMPUESTOS') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==53 && $cp3['campo']=='(IMPUESTOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==54 && $cp3['campo']=='DES_PRONTO_PAGO') {
+                                                        
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,0).'</td>';
+                                                        }elseif ($cp3['ID']==55 && $cp3['campo']=='(DES_PRONTO_PAGO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==57 && $cp3['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==56 && $cp3['campo']=='(GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos3,1).'</td>';
+                                                        }elseif ($cp3['ID']==59 && $cp3['campo']=='(DEPRECIACIONES_AMORTIZACIONES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==61 && $cp3['campo']=='((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }elseif ($cp3['ID']==63 && $cp3['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos3,1).'%'.'</td>';
+                                                        }
+
+                                                        
+                                                        if($cp3['ID']!=30 && $cp3['ID']!=40 && $cp3['ID']!=58 && $cp3['ID']!=60 && $cp3['ID']!=62 && $cp3['ID']!=31 && $cp3['ID']!=32 && $cp3['ID']!=34 && $cp3['ID']!=33 && $cp3['ID']!=35 && $cp3['ID']!=36 && $cp3['ID']!=37 && $cp3['ID']!=38 && $cp3['ID']!=39 && $cp3['ID']!=41 && $cp3['ID']!=42 && $cp3['ID']!=43 && $cp3['ID']!=44 && $cp3['ID']!=45 && $cp3['ID']!=46 && $cp3['ID']!=47 && $cp3['ID']!=48 && $cp3['ID']!=49 && $cp3['ID']!=50 && $cp3['ID']!=51 && $cp3['ID']!=52 && $cp3['ID']!=53 && $cp3['ID']!=54 && $cp3['ID']!=55 && $cp3['ID']!=56 && $cp3['ID']!=57 && $cp3['ID']!=59 && $cp3['ID']!=61 && $cp3['ID']!=63) {
+
+                                                            echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px background:white;;">$'.number_format($campos3,0).'</td>';    
+
+                                                        }
+
+                                                        
+
+                                                        }                                                                                   
+
+
+
+                                                        if($sumaAcumul3 == 0){
+
+                                                            $promedio = 0;
+                                                        }else{
+
+                                                            $promedio = $sumaAcumul3 / count($rangofech);
+                                                        }
+
+                                                        if($cp3['ID']==30 && $cp3['campo']=='GASTOS_ADMINISTRACION'){
+                                                            
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            
+                                                        }elseif($cp3['ID']==40 && $cp3['campo']=='GASTOS_VENTAS'){
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';                                                            
+
+                                                        }elseif($cp3['ID']==58 && $cp3['campo']=='DEPRECIACIONES_AMORTIZACIONES'){
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';                                                                
+
+                                                        }elseif ($cp3['ID']==60 && $cp3['campo']=='(GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)') {
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+
+                                                        }elseif ($cp3['ID']==62 && $cp3['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))') {
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+
+                                                        }elseif ($cp3['ID']==31 && $cp3['campo']=='(GASTOS_ADMINISTRACION/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==32 && $cp3['campo']=='GASTOS_PERSONAL') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==34 && $cp3['campo']=='HONORARIOS') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==33 && $cp3['campo']=='(GASTOS_PERSONAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==35 && $cp3['campo']=='(HONORARIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100/)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==36 && $cp3['campo']=='SERVICIOS') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==37 && $cp3['campo']=='(SERVICIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==38 && $cp3['campo']=='(GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==39 && $cp3['campo']=='(OTROS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==41 && $cp3['campo']=='(GASTOS_VENTAS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==42 && $cp3['campo']=='GASTOS_PERSONAL2') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==43 && $cp3['campo']=='(GASTOS_PERSONAL2/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==44 && $cp3['campo']=='POLIZA_CARTERA') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==45 && $cp3['campo']=='(POLIZA_CARTERA/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==46 && $cp3['campo']=='FLETES') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==47 && $cp3['campo']=='(FLETES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==48 && $cp3['campo']=='SERVICIO_LOGISTICO') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==49 && $cp3['campo']=='(SERVICIO_LOGISTICO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==50 && $cp3['campo']=='ESTRATEGIA_COMERCIAL') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==51 && $cp3['campo']=='(ESTRATEGIA_COMERCIAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==52 && $cp3['campo']=='IMPUESTOS') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==53 && $cp3['campo']=='(IMPUESTOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==54 && $cp3['campo']=='DES_PRONTO_PAGO') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==55 && $cp3['campo']=='(DES_PRONTO_PAGO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==56 && $cp3['campo']=='(GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==57 && $cp3['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==59 && $cp3['campo']=='(DEPRECIACIONES_AMORTIZACIONES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==61 && $cp3['campo']=='((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,0).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,0).'%'.'</td>';  
+                                                            
+                                                        }elseif ($cp3['ID']==63 && $cp3['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            
+                                                        }
+
+                                                        if($cp3['ID']!=30 && $cp3['ID']!=40 && $cp3['ID']!=58 && $cp3['ID']!=60 && $cp3['ID']!=62 && $cp3['ID']!=31 && $cp3['ID']!=32 && $cp3['ID']!=34 && $cp3['ID']!=33 && $cp3['ID']!=35 && $cp3['ID']!=36 && $cp3['ID']!=37 && $cp3['ID']!=38 && $cp3['ID']!=39 && $cp3['ID']!=41 && $cp3['ID']!=42 && $cp3['ID']!=43 && $cp3['ID']!=44 && $cp3['ID']!=45 && $cp3['ID']!=46 && $cp3['ID']!=47 && $cp3['ID']!=48 && $cp3['ID']!=49  && $cp3['ID']!=50 && $cp3['ID']!=51 && $cp3['ID']!=52 && $cp3['ID']!=53 && $cp3['ID']!=54 && $cp3['ID']!=55 && $cp3['ID']!=56 && $cp3['ID']!=57 && $cp3['ID']!=59 && $cp3['ID']!=61 && $cp3['ID']!=63) {
+                                                                
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
+
+                                                        }
+
+                                                    
+            
+                                                        echo'</tr>';
+
+                                                    }
+
+                                                    
+
+                                                }
+                                                ?>
+
+                                                                                        
+                                            
+                                        </tbody>
+                                    </table>
+                                    <table hidden="hidden" id="infoduq2" border="1" class="table m-b-0 table-hover" >
+                                        <thead class="thead-color">
+                                            <tr>
+                                                
+                                                <th style="text-align: center; position: -webkit-sticky; white-space: nowrap; position: sticky; left:0px;"> CONCEPTO </th>
+                                                <?php
+                                                foreach($rangofech as $rangomeses){
+                                                    
+                                                        $fechaInicio = $rangomeses['FechaI'];
+                                                        $fechaFinal = $rangomeses['FechaF'];
+                                                        $trimes = 'TRIMESTRE';
+
+                                                        if($fechaInicio == $fechaFinal){
+
+                                                            $mes = substr($fechaInicio,5,2);
+
+                                                            $anio = substr($fechaInicio,0,4);
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px;  ">
+                                                            '.NombreMeses($mes).' '.$anio.' </th>'; 
+
+                                                        }else{
+
+                                                            echo'<th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px;  ">
+                                                            '.$trimes.' </th>'; 
+
+                                                        }
+                                                    
+                                                }
+                                                
+                                                ?>
+                                            
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2893,7 +3717,7 @@
                                     <?php
                                     if($estadosConsulta == 1){?>
                                     <div class="table-responsive">
-                                        <table id="" border="1"  class="table m-b-0 table-hover" >
+                                        <table border="1"  class="table m-b-0 table-hover" >
                                             <thead class="thead-color">
                                                 <tr>
                                                     
@@ -3081,7 +3905,7 @@
                                     <?php
                                     if($estadosConsulta == 1){?>
                                     <div class="table-responsive">
-                                        <table id="" border="1" class="table m-b-0 table-hover" >
+                                        <table  border="1" class="table m-b-0 table-hover" >
                                             <thead class="thead-color">
                                                 <tr>
                                                     
@@ -5670,7 +6494,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
                             
 
                             </div>
@@ -5775,6 +6599,48 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        
+
+        <script>
+
+            function exportTableToExcel(tableID, tableID1, tableID2, filename = ''){
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var tableSelect = document.getElementById(tableID);
+                var tableSelect1 = document.getElementById(tableID1);
+                var tableSelect2 = document.getElementById(tableID2);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+                var tableHTML1 = tableSelect1.outerHTML.replace(/ /g, '%20');
+                var tableHTML2 = tableSelect2.outerHTML.replace(/ /g, '%20');
+                
+                // Specify file name
+                filename = filename?filename+'.xls':'Informe_Junta_Directiva_Duquesa.xls';
+                
+                // Create download link element
+                downloadLink = document.createElement("a");
+                
+                document.body.appendChild(downloadLink);
+                
+                if(navigator.msSaveOrOpenBlob){
+                    var blob = new Blob(['ufeff', tableHTML, tableHTML1, tableHTML2], {
+                        type: dataType
+                    });
+                    navigator.msSaveOrOpenBlob( blob, filename);
+                }else{
+                    // Create a link to the file
+                    downloadLink.href = 'data:' + dataType + ', '+ 'VENTAS_NETAS' + tableHTML +  'COSTOS_DE_VENTAS' + tableHTML1 + 'GASTOS_OPERACIONALES' + tableHTML2;
+                
+                    // Setting the file name
+                    downloadLink.download = filename;
+                    
+                    //triggering the function
+                    downloadLink.click();
+                }
+
+                
+            }
+        </script>
+
         
     </body>
 </html>

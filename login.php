@@ -23,11 +23,11 @@
                                     <div class="card-body">
                                         <form action="ValidaUsuarioCredencial.php" method="POST">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="Usuario" id="inputUsuario" type="text" placeholder="Ingrese Usuario" style="font-weight: bold;" />
+                                                <input required class="form-control" name="Usuario" id="inputUsuario" type="text" placeholder="Ingrese Usuario" style="font-weight: bold;" />
                                                 <label for="inputText"><b>Ingresar Usuario</b></label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="Password" id="inputPassword" type="password" placeholder="Ingrese Contraseña" style="font-weight: bold;" />
+                                                <input required class="form-control" name="Password" id="inputPassword" type="password" placeholder="Ingrese Contraseña" style="font-weight: bold;" />
                                                 <label for="inputPassword"><b>Ingresar Contraseña</b></label>
                                             </div>
                                             
