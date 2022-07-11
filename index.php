@@ -195,7 +195,7 @@
                            
 
                         </div>
-
+                        
 
                         <?php
                         if($SelectFiltro == 'Mes_Acumulado'){
@@ -255,8 +255,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -441,8 +441,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -731,8 +731,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1131,8 +1131,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1389,8 +1389,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1621,8 +1621,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1852,8 +1852,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:#E6B8B7; ">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:#E6B8B7; ">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2151,8 +2151,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2614,8 +2614,8 @@
                                                 
                                                 ?>
                                             
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">ACUMULADO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO</th>
                                                 
                                             </tr>
                                         </thead>
@@ -5609,7 +5609,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">                            
-                            <button class="btn btn-danger" data-bs-target="#Partiduras" data-bs-toggle="modal" data-bs-dismiss="modal">Actualizar Partidas</button>
+                            <button class="btn btn-danger" data-bs-target="#Partiduras" data-bs-toggle="modal" data-bs-dismiss="modal">Ir Actualizar Todas Las Partidas</button>
                         </div>
                         </div>
                     </div>
@@ -5726,7 +5726,7 @@
                                             <td hidden="hidden"><input hidden="hideen" name="id_nuevo" type="text" value="<?php echo $PAR_NID; ?>"></td>
                                             <td style="padding-top: 20px; text-align:center;"><?php echo $PAR_DFECHA;?></td>
                                             <td style="padding-top: 20px; text-align:center;"><?php echo $PAR_CPARTIDURA;?></td>
-                                            <td><input disabled type="namber" name="Cantidad" class="form-control" value="<?php echo ($PAR_CCANTIDAD);?>" style ="text-align: center;"></td>
+                                            <td><input disabled type="namber" name="Cantidad" class="form-control" value="<?php echo number_format($PAR_CCANTIDAD,1);?>" style ="text-align: center;"></td>
                                             <td><input  type="float" name="nuevaCantidad" class="form-control" style ="text-align: center;"></td>
                                             <td style="text-align:center"><button type="submit" class="btn btn-link" id="enviar" name="enviar"><img src="img/actualizar.png" alt="actualiza_icono"></button></td>
                                             
@@ -5752,7 +5752,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-top: 140px;" >Partidas Mes Actual</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-top: 140px;" >Volver Partidas Mes Actual</button>
                             
                         </div>
                         </div>
