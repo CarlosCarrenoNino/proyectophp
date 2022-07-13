@@ -174,23 +174,24 @@
                                             <form action="#" method="POST">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <label for="" ><b>Fecha Inicio: <?php echo $inicio; ?></b></label><br><br>                                                    
-                                                        <input  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeInicio" id="fechainformeInicio1" >
-                                                    </div> 
-                                                    
-                                                    <div class="col-md-3">
-                                                        <label for=""  ><b>Fecha Fin: <?php echo $final; ?></b></label><br><br>
-                                                        <input  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeFin" id="fechainformeFin1" >
-                                                    </div> 
-                                                    <div class="col-md-3">
                                                         <label for="" ><b>Filtrar por</b></label><br><br>
-                                                        <select  list="SelectFiltro"  name="SelectFiltro" id="SelectFiltro" class="form-control" >
+                                                        <select required  list="SelectFiltro"  name="SelectFiltro" id="SelectFiltro" class="form-control" >
                                                             <option value="">Seleccione una Opción</option>
                                                             <option value="Mes_Acumulado">Acumulado Ejecutado</option>
                                                             <option value="Mes_a_Mes">Mes Ejecutado</option>
                                                         
                                                         </select>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <label for="" ><b>Fecha Inicio: <?php echo $inicio; ?></b></label><br><br>                                                    
+                                                        <input required  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeInicio" id="fechainformeInicio1" >
+                                                    </div> 
+                                                    
+                                                    <div class="col-md-3">
+                                                        <label for=""  ><b>Fecha Fin: <?php echo $final; ?></b></label><br><br>
+                                                        <input required  type="month" class="form-control" max="<?php echo $anioHoy.'-0'.$mesHoy; ?>"  name="fechainformeFin" id="fechainformeFin1" >
+                                                    </div> 
+                                                    
                                                     <div class="col-md-3">
                                                         <button type="submit" class="btn btn-danger"  name="enviar" id="enviar1" style="margin-block-start: 47px; ">
                                                         
@@ -288,7 +289,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px background:#E6B8B7;  ; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px background:#E6B8B7; ; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px background:#E6B8B7; ; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -339,12 +340,12 @@
                                                                 
                                                                 
 
-                                                                    if($cp['ID']==4 && $cp['campo']=='(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)'){
+                                                                    if($cp['ID']==4 || $cp['ID']==8 || $cp['ID']==9){
         
                                                                     
                                                                         echo '<td  style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
                                                                         
-                                                                    }elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
+                                                                    }/* elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
                                                                         
                                                                         echo '<td  style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
             
@@ -352,7 +353,7 @@
                                                                         
                                                                         echo '<td  style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campo,0).'</td>';
             
-                                                                    }
+                                                                    } */
 
 
                                                                     if($cp['ID']!=4 && $cp['ID']!=8 && $cp['ID']!=9) {
@@ -378,6 +379,8 @@
                                                                     $promedioI = $fechas -1;
 
                                                                     $promedio = $sumaAcumul / $promedioI;
+
+                                                                    //echo 'este es el promedio VN: '.$promedio;
 
                                                                 }elseif($fechas==8 or $fechas==9 or $fechas==10){
                                                                     
@@ -407,12 +410,12 @@
                                                             }
 
                                                                 
-                                                            if($cp['ID']==4 && $cp['campo']=='(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)'){
+                                                            if($cp['ID']==4 || $cp['ID']==8 || $cp['ID']==9){
                                                                 
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;">$'.number_format($sumaAcumul,0).'</td>';
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                            }elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
+                                                            }/* elseif($cp['ID']==8 && $cp['campo']=='(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)'){
         
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul,0).'</td>';
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
@@ -422,7 +425,7 @@
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul,0).'</td>';
                                                                 echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
         
-                                                            }
+                                                            } */
         
         
                                                             if($cp['ID']!=4 && $cp['ID']!=8 && $cp['ID']!=9) {
@@ -482,7 +485,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -702,7 +705,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:#E6B8B7; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -823,38 +826,38 @@
 
                                                         if($sumaAcumul2 == 0){
 
-                                                            $promedio = 0;
+                                                            $promedio2 = 0;
                                                         }else{
 
                                                             if($fechas <=3){
 
-                                                                $promedio = $sumaAcumul2 / $fechas;
+                                                                $promedio2 = $sumaAcumul2 / $fechas;
 
                                                             }elseif($fechas == 4 or $fechas == 5 or $fechas == 6){
 
                                                                 $promedioI = $fechas -1;
 
-                                                                $promedio = $sumaAcumul2 / $promedioI;
+                                                                $promedio2 = $sumaAcumul2 / $promedioI;
 
                                                             }elseif($fechas==8 or $fechas==9 or $fechas==10){
                                                                 
                                                                 $promedioI = $fechas -2;
 
-                                                                $promedio = $sumaAcumul2 / $promedioI;
+                                                                $promedio2 = $sumaAcumul2 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==12 or $fechas==13 or $fechas==14){
                                                                 
                                                                 $promedioI = $fechas -3;
 
-                                                                $promedio = $sumaAcumul2 / $promedioI;
+                                                                $promedio2 = $sumaAcumul2 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==16){
                                                                 
                                                                 $promedioI = $fechas -4;
 
-                                                                $promedio = $sumaAcumul2 / $promedioI;
+                                                                $promedio2 = $sumaAcumul2 / $promedioI;
                                                                 
                                                                 
                                                             }
@@ -866,82 +869,82 @@
                                                         if($cp2['ID']==16 && $cp2['campo']=='(ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio2,0).'</td>';
                                                             
                                                         }elseif($cp2['ID']==24 && $cp2['campo']=='(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio2,0).'</td>';
 
                                                         }elseif($cp2['ID']==26 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio2,0).'</td>';
 
                                                         }elseif ($cp2['ID']==28 && $cp2['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))') {
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($sumaAcumul2,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">$'.number_format($promedio2,0).'</td>';
 
                                                         }elseif($cp2['ID']==11 && $cp2['campo']=='((ACEITES2/ACEITES)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
 
                                                         }elseif($cp2['ID']==13 && $cp2['campo']=='((MARGARINAS2/MARGARINAS)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                         
                                                         }elseif($cp2['ID']==15 && $cp2['campo']=='((SOLIDOS_CREMOSOS2/SOLIDOS_CREMOSOS)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==17 && $cp2['campo']=='((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)/(ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==19 && $cp2['campo']=='(INDUSTRIALES2/INDUSTRIALES)*100'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==21 && $cp2['campo']=='((ACIDOS_GRASOS_ACIDULADO2/ACIDOS_GRASOS_ACIDULADO)*100)'){
                                                             
                                                         
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==23 && $cp2['campo']=='((SERVICIO_MAQUILA2/SERVICIO_MAQUILA)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==25 && $cp2['campo']=='((INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)/(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA)*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==27 && $cp2['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }elseif($cp2['ID']==29 && $cp2['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($sumaAcumul2,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white;  ">'.number_format($promedio2,1).'%'.'</td>';
                                                             
                                                         }
 
@@ -949,7 +952,7 @@
                                                             
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($sumaAcumul2,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; background:white; ">$'.number_format($promedio2,0).'</td>';
                                                             
                                                         } 
             
@@ -1000,7 +1003,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 330px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1324,7 +1327,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -1499,38 +1502,38 @@
 
                                                         if($sumaAcumul3 == 0){
 
-                                                            $promedio = 0;
+                                                            $promedio3 = 0;
                                                         }else{
 
                                                             if($fechas <=3){
 
-                                                                $promedio = $sumaAcumul3 / $fechas;
+                                                                $promedio3 = $sumaAcumul3 / $fechas;
 
                                                             }elseif($fechas == 4 or $fechas == 5 or $fechas == 6){
 
                                                                 $promedioI = $fechas -1;
 
-                                                                $promedio = $sumaAcumul3 / $promedioI;
+                                                                $promedio3 = $sumaAcumul3 / $promedioI;
 
                                                             }elseif($fechas==8 or $fechas==9 or $fechas==10){
                                                                 
                                                                 $promedioI = $fechas -2;
 
-                                                                $promedio = $sumaAcumul3 / $promedioI;
+                                                                $promedio3 = $sumaAcumul3 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==12 or $fechas==13 or $fechas==14){
                                                                 
                                                                 $promedioI = $fechas -3;
 
-                                                                $promedio = $sumaAcumul3 / $promedioI;
+                                                                $promedio3 = $sumaAcumul3 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==16){
                                                                 
                                                                 $promedioI = $fechas -4;
 
-                                                                $promedio = $sumaAcumul3 / $promedioI;
+                                                                $promedio3 = $sumaAcumul3 / $promedioI;
                                                                 
                                                                 
                                                             }
@@ -1542,146 +1545,146 @@
                                                         if($cp3['ID']==30 && $cp3['campo']=='GASTOS_ADMINISTRACION'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';
                                                             
                                                         }elseif($cp3['ID']==40 && $cp3['campo']=='GASTOS_VENTAS'){
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';                                                            
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';                                                            
 
                                                         }elseif($cp3['ID']==58 && $cp3['campo']=='DEPRECIACIONES_AMORTIZACIONES'){
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';                                                                
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';                                                                
 
                                                         }elseif ($cp3['ID']==60 && $cp3['campo']=='(GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)') {
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
 
                                                         }elseif ($cp3['ID']==62 && $cp3['campo']=='(((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))') {
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
 
                                                         }elseif ($cp3['ID']==31 && $cp3['campo']=='(GASTOS_ADMINISTRACION/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==32 && $cp3['campo']=='GASTOS_PERSONAL') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==34 && $cp3['campo']=='HONORARIOS') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==33 && $cp3['campo']=='(GASTOS_PERSONAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==35 && $cp3['campo']=='(HONORARIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100/)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==36 && $cp3['campo']=='SERVICIOS') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==37 && $cp3['campo']=='(SERVICIOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==38 && $cp3['campo']=='(GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==39 && $cp3['campo']=='(OTROS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==41 && $cp3['campo']=='(GASTOS_VENTAS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==42 && $cp3['campo']=='GASTOS_PERSONAL2') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==43 && $cp3['campo']=='(GASTOS_PERSONAL2/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==44 && $cp3['campo']=='POLIZA_CARTERA') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==45 && $cp3['campo']=='(POLIZA_CARTERA/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==46 && $cp3['campo']=='FLETES') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==47 && $cp3['campo']=='(FLETES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==48 && $cp3['campo']=='SERVICIO_LOGISTICO') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==49 && $cp3['campo']=='(SERVICIO_LOGISTICO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==50 && $cp3['campo']=='ESTRATEGIA_COMERCIAL') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==51 && $cp3['campo']=='(ESTRATEGIA_COMERCIAL/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==52 && $cp3['campo']=='IMPUESTOS') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==53 && $cp3['campo']=='(IMPUESTOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==54 && $cp3['campo']=='DES_PRONTO_PAGO') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==55 && $cp3['campo']=='(DES_PRONTO_PAGO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==56 && $cp3['campo']=='(GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==57 && $cp3['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==59 && $cp3['campo']=='(DEPRECIACIONES_AMORTIZACIONES/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==61 && $cp3['campo']=='((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,0).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,0).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,0).'%'.'</td>';  
                                                             
                                                         }elseif ($cp3['ID']==63 && $cp3['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)') {
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul3,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';  
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio3,1).'%'.'</td>';  
                                                             
                                                         }
 
                                                         if($cp3['ID']!=30 && $cp3['ID']!=40 && $cp3['ID']!=58 && $cp3['ID']!=60 && $cp3['ID']!=62 && $cp3['ID']!=31 && $cp3['ID']!=32 && $cp3['ID']!=34 && $cp3['ID']!=33 && $cp3['ID']!=35 && $cp3['ID']!=36 && $cp3['ID']!=37 && $cp3['ID']!=38 && $cp3['ID']!=39 && $cp3['ID']!=41 && $cp3['ID']!=42 && $cp3['ID']!=43 && $cp3['ID']!=44 && $cp3['ID']!=45 && $cp3['ID']!=46 && $cp3['ID']!=47 && $cp3['ID']!=48 && $cp3['ID']!=49  && $cp3['ID']!=50 && $cp3['ID']!=51 && $cp3['ID']!=52 && $cp3['ID']!=53 && $cp3['ID']!=54 && $cp3['ID']!=55 && $cp3['ID']!=56 && $cp3['ID']!=57 && $cp3['ID']!=59 && $cp3['ID']!=61 && $cp3['ID']!=63) {
                                                                 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul3,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio3,0).'</td>';
 
                                                         }
 
@@ -1733,7 +1736,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2167,7 +2170,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2281,38 +2284,38 @@
 
                                                         if($sumaAcumul4 == 0){
 
-                                                            $promedio = 0;
+                                                            $promedio4 = 0;
                                                         }else{
 
                                                             if($fechas <=3){
 
-                                                                $promedio = $sumaAcumul4 / $fechas;
+                                                                $promedio4 = $sumaAcumul4 / $fechas;
 
                                                             }elseif($fechas == 4 or $fechas == 5 or $fechas == 6){
 
                                                                 $promedioI = $fechas -1;
 
-                                                                $promedio = $sumaAcumul4 / $promedioI;
+                                                                $promedio4 = $sumaAcumul4 / $promedioI;
 
                                                             }elseif($fechas==8 or $fechas==9 or $fechas==10){
                                                                 
                                                                 $promedioI = $fechas -2;
 
-                                                                $promedio = $sumaAcumul4 / $promedioI;
+                                                                $promedio4 = $sumaAcumul4 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==12 or $fechas==13 or $fechas==14){
                                                                 
                                                                 $promedioI = $fechas -3;
 
-                                                                $promedio = $sumaAcumul4 / $promedioI;
+                                                                $promedio4 = $sumaAcumul4 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==16){
                                                                 
                                                                 $promedioI = $fechas -4;
 
-                                                                $promedio = $sumaAcumul4 / $promedioI;
+                                                                $promedio4 = $sumaAcumul4 / $promedioI;
                                                                 
                                                                 
                                                             }
@@ -2324,57 +2327,57 @@
                                                         if($cp4['ID']==72 && $cp4['campo']=='((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul4,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio4,0).'</td>';
                                                                                                                     
                                                         }elseif($cp4['ID']==74 && $cp4['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))'){
                                                                                                                     
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul4,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio4,0).'</td>';
 
                                                         }elseif($cp4['ID']==76 && $cp4['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))'){
                                                                                                                     
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">$'.number_format($sumaAcumul4,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">$'.number_format($promedio4,0).'</td>';
 
                                                         }elseif($cp4['ID']==65 && $cp4['campo']=='(FINANCIEROS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==66 && $cp4['campo']=='RETIRO_ACTIVOS'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul4,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio4,0).'</td>';
 
                                                         }elseif($cp4['ID']==67 && $cp4['campo']=='(RETIRO_ACTIVOS/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==69 && $cp4['campo']=='(GRAVA_MOV_FINANCIERO/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==71 && $cp4['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==73 && $cp4['campo']=='(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==75 && $cp4['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,0).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,0).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,0).'%'.'</td>';
 
                                                         }elseif($cp4['ID']==77 && $cp4['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))*100)'){
                                                                                                                     
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul4,1).'%'.'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio4,1).'%'.'</td>';
 
                                                         }
 
@@ -2382,7 +2385,7 @@
                                                         if($cp4['ID']!=72 && $cp4['ID']!=74 && $cp4['ID']!=76  && $cp4['ID']!=65 && $cp4['ID']!=66 && $cp4['ID']!=67  && $cp4['ID']!=69  && $cp4['ID']!=71  && $cp4['ID']!=73  && $cp4['ID']!=75  && $cp4['ID']!=77) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul4,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio4,0).'</td>';
 
                                                         }
                                                     
@@ -2432,7 +2435,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2724,7 +2727,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -2820,38 +2823,40 @@
 
                                                         if($sumaAcumul5 == 0){
 
-                                                            $promedio = 0;
+                                                            $promedio5 = 0;
                                                         }else{
 
                                                             if($fechas <=3){
 
-                                                                $promedio = $sumaAcumul5 / $fechas;
+                                                                $promedio5 = $sumaAcumul5 / $fechas;
 
                                                             }elseif($fechas == 4 or $fechas == 5 or $fechas == 6){
 
                                                                 $promedioI = $fechas -1;
 
-                                                                $promedio = $sumaAcumul5 / $promedioI;
+                                                                $promedio5 = $sumaAcumul5 / $promedioI;
+
+                                                                //echo 'este es el promedio VT: '.$promedio5;
 
                                                             }elseif($fechas==8 or $fechas==9 or $fechas==10){
                                                                 
                                                                 $promedioI = $fechas -2;
 
-                                                                $promedio = $sumaAcumul5 / $promedioI;
+                                                                $promedio5 = $sumaAcumul5 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==12 or $fechas==13 or $fechas==14){
                                                                 
                                                                 $promedioI = $fechas -3;
 
-                                                                $promedio = $sumaAcumul5 / $promedioI;
+                                                                $promedio5 = $sumaAcumul5 / $promedioI;
                                                                 
                                                                 
                                                             }elseif($fechas==16){
                                                                 
                                                                 $promedioI = $fechas -4;
 
-                                                                $promedio = $sumaAcumul5 / $promedioI;
+                                                                $promedio5 = $sumaAcumul5 / $promedioI;
                                                                 
                                                                 
                                                             }
@@ -2863,42 +2868,42 @@
                                                         if($cp5['ID']==78 && $cp5['campo']=='(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
                                                                                                                     
                                                         }elseif($cp5['ID']==82 && $cp5['campo']=='(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS)'){
                                                                                                                     
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==85 && $cp5['campo']=='TON_SERVICIO_MAQUILA'){
                                                                                                                     
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==79 && $cp5['campo']=='TON_ACEITES'){
                                                             
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==80 && $cp5['campo']=='TON_MARGARINAS'){
                                                             
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==81 && $cp5['campo']=='TON_SOLIDOS_CREMOSOS'){
                                                             
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==83 && $cp5['campo']=='TON_INDUSTRIALES_OLEO'){
                                                             
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }elseif($cp5['ID']==84 && $cp5['campo']=='TON_ACIDOS_GRASOS_ACIDULADO'){
                                                             
                                                             echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }
 
@@ -2906,7 +2911,7 @@
                                                         if($cp5['ID']!=78 && $cp5['ID']!=79 && $cp5['ID']!=80  && $cp5['ID']!=81 && $cp5['ID']!=82  && $cp5['ID']!=83  && $cp5['ID']!=84  && $cp5['ID']!=85) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($sumaAcumul5,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; background:white; ">'.number_format($promedio5,0).'</td>';
 
                                                         }
                                                     
@@ -2958,7 +2963,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 265px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -3224,7 +3229,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -3239,7 +3244,7 @@
                                                 foreach(Cuerpo() as $cp6){
 
 
-                                                    if($cp6['ID'] >= 86 && $cp6['ID'] <= 94){
+                                                    if($cp6['ID'] >= 86 && $cp6['ID'] <= 93){
 
                                                         $sumaAcumul6=0;
 
@@ -3270,15 +3275,28 @@
 
                                                         if($fechaInicio == $fechaFinal){
 
+                                                            //if($cp['ID']==1 && $cp['campo'] =='ACEITES' && $cp5['ID']==79 && $cp5['campo']=='TON_ACEITES'){
+                                                            
                                                             $sumaAcumul6 = $sumaAcumul6 + $campos6;
+                                                                
+                                                            //}
 
-                                                        } 
+                                                            //$sumaAcumul6 = $sumaAcumul / $sumaAcumul5;
+
+                                                                /* echo 'Acumulado VN: '.$sumaAcumul;
+                                                                echo 'Acumulado VT: '.$sumaAcumul5;
+                                                                echo 'Acumulado VNU: '.$sumaAcumul6; */
+                                                            
+
+                                                        }  
+
+                                                        
 
                                                         if($cp6['ID']==89 && $cp6['campo']=='((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campos6,0).'</td>';
                                                             
-                                                        }elseif($cp6['ID']==94 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp6['ID']==93 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campos6,0).'</td>';
 
@@ -3309,7 +3327,7 @@
                                                         }
 
 
-                                                        if($cp6['ID']!=89 && $cp6['ID']!=94 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
+                                                        if($cp6['ID']!=89 && $cp6['ID']!=93 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;  ">$'.number_format($campos4,0).'</td>';    
 
@@ -3321,9 +3339,20 @@
                                                         }                                                                                   
 
 
-                                                    
-
                                                         if($sumaAcumul6 == 0){
+
+                                                            $promedio6 = 0;
+
+                                                        }else{
+
+                                                            $promedio6 = $promedio/$promedio5;
+                                                            /* echo 'este es el promedio VN: '.$promedio;
+                                                            echo 'este es el promedio VT: '.$promedio5;
+                                                            echo 'este es el promedio VNU: '.$promedio6; */
+
+                                                        }
+
+                                                        /*if($sumaAcumul6 == 0){
 
                                                             $promedio = 0;
                                                         }else{
@@ -3363,47 +3392,68 @@
 
     
                                                             
-                                                        }
+                                                        } */
+
+                                                        
 
                                                         if($cp6['ID']==89 && $cp6['campo']=='((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
                                                             
                                                         }elseif($cp6['ID']==94 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
-                                                        }elseif($cp6['ID']==86 && $cp6['campo']=='(ACEITES/TON_ACEITES)'){
+                                                        }elseif($cp6['ID']==86){
+
+                                                                $cp['ID']==1 && $cp['campo'] && $cp5['ID']==79 && $cp5['campo'];
+
+                                                                $sumaAcumul6 = $campo / $campos5;
+
+                                                                echo 'este es el promedio VN: '.$campo;
+                                                                echo 'este es el promedio VT: '.$campos5;
+                                                                echo 'este es el promedio VNU: '.$sumaAcumul6; 
+
+                                                                
+                                                                echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
+                                                                echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
+
                                                             
+
+                                                                /* echo 'este es el promedio VN: '.$sumaAcumul;
+                                                                echo 'este es el promedio VT: '.$sumaAcumul5;
+                                                                echo 'este es el promedio VNU: '.$sumaAcumul6; 
+
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
+                                                             */
 
                                                         }elseif($cp6['ID']==87 && $cp6['campo']=='(MARGARINAS/TON_MARGARINAS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 220px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 220px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 220px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }elseif($cp6['ID']==88 && $cp6['campo']=='(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }elseif($cp6['ID']==90 && $cp6['campo']=='(INDUSTRIALES/TON_INDUSTRIALES_OLEO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }elseif($cp6['ID']==91 && $cp6['campo']=='(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }elseif($cp6['ID']==92 && $cp6['campo']=='(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }
 
@@ -3411,7 +3461,7 @@
                                                         if($cp6['ID']!=89 && $cp6['ID']!=94 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($sumaAcumul6,0).'</td>';
-                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio,0).'</td>';
+                                                            echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($promedio6,0).'</td>';
 
                                                         }
 
@@ -3464,7 +3514,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -3479,7 +3529,7 @@
                                                 foreach(Cuerpo() as $cp6){
 
 
-                                                    if($cp6['ID'] >= 86 && $cp6['ID'] <= 94){
+                                                    if($cp6['ID'] >= 86 && $cp6['ID'] <= 93){
 
                                                         $sumaAcumul6=0;
 
@@ -3518,7 +3568,7 @@
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($campos6,0).'</td>';
                                                             
-                                                        }elseif($cp6['ID']==94 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp6['ID']==93 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($campos6,0).'</td>';
 
@@ -3549,7 +3599,7 @@
                                                         }
 
 
-                                                        if($cp6['ID']!=89 && $cp6['ID']!=94 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
+                                                        if($cp6['ID']!=89 && $cp6['ID']!=93 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;  ">'.round($campos4,0).'</td>';    
 
@@ -3610,7 +3660,7 @@
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($sumaAcumul6,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($promedio,0).'</td>';
                                                             
-                                                        }elseif($cp6['ID']==94 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp6['ID']==93 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($sumaAcumul6,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($promedio,0).'</td>';
@@ -3648,7 +3698,7 @@
                                                         }
 
 
-                                                        if($cp6['ID']!=89 && $cp6['ID']!=94 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
+                                                        if($cp6['ID']!=89 && $cp6['ID']!=93 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($sumaAcumul6,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">'.round($promedio,0).'</td>';
@@ -3729,7 +3779,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:#E6B8B7; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:#E6B8B7; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:#E6B8B7; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -3744,7 +3794,7 @@
                                                 foreach(Cuerpo() as $cp7){
 
 
-                                                    if($cp7['ID'] >= 95 && $cp7['ID'] <= 110){
+                                                    if($cp7['ID'] >= 94 && $cp7['ID'] <= 109){
 
                                                         $sumaAcumul7=0;
 
@@ -3779,74 +3829,74 @@
 
                                                         } 
 
-                                                        if($cp7['ID']==107 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp7['ID']==106 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
                                                             
-                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
+                                                        }elseif($cp7['ID']==94 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
+                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
+                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
+                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
+                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
+                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
+                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
+                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
+                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
+                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==106 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
+                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==107 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==110 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
                                                         }
 
 
-                                                        if($cp7['ID']!=107 && $cp7['ID']!=109 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=110 ) {
+                                                        if($cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=94 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=107 && $cp7['ID']!=109 ) {
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">$'.number_format($campos7,0).'</td>';    
 
@@ -3902,88 +3952,88 @@
                                                             
                                                         }
 
-                                                        if($cp7['ID']==107 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp7['ID']==106 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
                                                             
-                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
-                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
+                                                        }elseif($cp7['ID']==94 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
+                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
+                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
+                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
+                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
+                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
+                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
+                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
+                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
+                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==106 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
+                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==107 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp7['ID']==110 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($sumaAcumul7,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
                                                         }
 
-                                                        if($cp7['ID']!=107 && $cp7['ID']!=109 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=110) {
+                                                        if($cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=94 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=107 && $cp7['ID']!=109) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($promedio,0).'</td>';
@@ -4038,7 +4088,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -4053,7 +4103,7 @@
                                                 foreach(Cuerpo() as $cp7){
 
 
-                                                    if($cp7['ID'] >= 95 && $cp7['ID'] <= 110){
+                                                    if($cp7['ID'] >= 94 && $cp7['ID'] <= 109){
 
                                                         $sumaAcumul7=0;
 
@@ -4088,74 +4138,74 @@
 
                                                         } 
 
-                                                        if($cp7['ID']==107 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp7['ID']==106 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
                                                             
-                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
+                                                        }elseif($cp7['ID']==94 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
+                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
+                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
+                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
+                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
+                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
+                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
+                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
+                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
+                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==106 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
+                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==107 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
-                                                        }elseif($cp7['ID']==110 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($campos7,0).'</td>';
 
                                                         }
 
 
-                                                        if($cp7['ID']!=107 && $cp7['ID']!=109 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=110 ) {
+                                                        if($cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=94 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=107 && $cp7['ID']!=109 ) {
 
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">'.round($campos7,0).'</td>';    
 
@@ -4211,88 +4261,88 @@
                                                             
                                                         }
 
-                                                        if($cp7['ID']==107 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp7['ID']==106 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
                                                             
-                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
-                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
+                                                        }elseif($cp7['ID']==94 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
+                                                        }elseif($cp7['ID']==95 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
+                                                        }elseif($cp7['ID']==96 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
+                                                        }elseif($cp7['ID']==97 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
+                                                        }elseif($cp7['ID']==98 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
+                                                        }elseif($cp7['ID']==99 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
+                                                        }elseif($cp7['ID']==100 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
+                                                        }elseif($cp7['ID']==101 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
+                                                        }elseif($cp7['ID']==102 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==103 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
+                                                        }elseif($cp7['ID']==104 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==106 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
+                                                        }elseif($cp7['ID']==105 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==108 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==107 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp7['ID']==110 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp7['ID']==109 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
 
                                                         }
 
-                                                        if($cp7['ID']!=107 && $cp7['ID']!=109 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=110) {
+                                                        if($cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=94 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=107 && $cp7['ID']!=109) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($sumaAcumul7,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.round($promedio,0).'</td>';
@@ -4371,7 +4421,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -4386,7 +4436,7 @@
                                                 foreach(Cuerpo() as $cp8){
 
 
-                                                    if($cp8['ID'] >= 111 && $cp8['ID'] <= 144){
+                                                    if($cp8['ID'] >= 110 && $cp8['ID'] <= 143){
 
                                                         $sumaAcumul8=0;
 
@@ -4421,146 +4471,146 @@
 
                                                         } 
 
-                                                        if($cp8['ID']==111 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp8['ID']==110 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;">$'.number_format($campos8,0).'</td>';
                                                             
-                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==141 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==111 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==144 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
                                                         }
 
 
-                                                        if($cp8['ID']!=111 && $cp8['ID']!=121 && $cp8['ID']!=139  && $cp8['ID']!=141 && $cp8['ID']!=143  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=120  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=138  && $cp8['ID']!=140  && $cp8['ID']!=142  && $cp8['ID']!=144) {
+                                                        if($cp8['ID']!=110 && $cp8['ID']!=120 && $cp8['ID']!=138  && $cp8['ID']!=140 && $cp8['ID']!=142  && $cp8['ID']!=111  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=121  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=139  && $cp8['ID']!=140  && $cp8['ID']!=143) {
 
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';    
 
@@ -4616,172 +4666,172 @@
                                                             
                                                         }
 
-                                                        if($cp8['ID']==111 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp8['ID']==110 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
                                                             
-                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==141 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==111 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp8['ID']==144 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($sumaAcumul8,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
@@ -4789,7 +4839,7 @@
                                                         }
 
 
-                                                        if($cp8['ID']!=111 && $cp8['ID']!=121 && $cp8['ID']!=139  && $cp8['ID']!=141 && $cp8['ID']!=143  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=120  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=138  && $cp8['ID']!=140  && $cp8['ID']!=142  && $cp8['ID']!=144) {
+                                                        if($cp8['ID']!=110 && $cp8['ID']!=120 && $cp8['ID']!=138  && $cp8['ID']!=140 && $cp8['ID']!=142  && $cp8['ID']!=111  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=121  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=139  && $cp8['ID']!=140  && $cp8['ID']!=143) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($promedio,0).'</td>';
@@ -4844,7 +4894,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -4859,7 +4909,7 @@
                                                 foreach(Cuerpo() as $cp8){
 
 
-                                                    if($cp8['ID'] >= 111 && $cp8['ID'] <= 144){
+                                                    if($cp8['ID'] >= 110 && $cp8['ID'] <= 143){
 
                                                         $sumaAcumul8=0;
 
@@ -4894,146 +4944,146 @@
 
                                                         } 
 
-                                                        if($cp8['ID']==111 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp8['ID']==110 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;">'.round($campos8,0).'</td>';
                                                             
-                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==141 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==111 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
-                                                        }elseif($cp8['ID']==144 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';
 
                                                         }
 
 
-                                                        if($cp8['ID']!=111 && $cp8['ID']!=121 && $cp8['ID']!=139  && $cp8['ID']!=141 && $cp8['ID']!=143  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=120  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=138  && $cp8['ID']!=140  && $cp8['ID']!=142  && $cp8['ID']!=144) {
+                                                        if($cp8['ID']!=110 && $cp8['ID']!=120 && $cp8['ID']!=138  && $cp8['ID']!=140 && $cp8['ID']!=142  && $cp8['ID']!=111  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=121  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=139  && $cp8['ID']!=140  && $cp8['ID']!=143) {
 
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($campos8,0).'</td>';    
 
@@ -5089,172 +5139,172 @@
                                                             
                                                         }
 
-                                                        if($cp8['ID']==111 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        if($cp8['ID']==110 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
                                                             
-                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==141 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==111 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==112 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==113 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==114 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==115 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==116 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==117 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==118 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==120 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==119 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==121 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==122 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==123 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==124 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==125 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==126 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==127 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==128 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==129 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==130 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==131 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==132 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==133 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==134 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==135 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp8['ID']==136 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==138 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==137 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==139 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==142 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==140 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp8['ID']==144 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp8['ID']==143 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
@@ -5262,7 +5312,7 @@
                                                         }
 
 
-                                                        if($cp8['ID']!=111 && $cp8['ID']!=121 && $cp8['ID']!=139  && $cp8['ID']!=141 && $cp8['ID']!=143  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=120  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=138  && $cp8['ID']!=140  && $cp8['ID']!=142  && $cp8['ID']!=144) {
+                                                        if($cp8['ID']!=110 && $cp8['ID']!=120 && $cp8['ID']!=138  && $cp8['ID']!=140 && $cp8['ID']!=142  && $cp8['ID']!=111  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=121  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=139  && $cp8['ID']!=140  && $cp8['ID']!=143) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($sumaAcumul8,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.round($promedio,0).'</td>';
@@ -5341,7 +5391,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:#E6B8B7;">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -5356,7 +5406,7 @@
                                                 foreach(Cuerpo() as $cp9){
 
 
-                                                    if($cp9['ID'] >= 145 && $cp9['ID'] <= 158){
+                                                    if($cp9['ID'] >= 144 && $cp9['ID'] <= 157){
 
                                                         $sumaAcumul9=0;
 
@@ -5391,66 +5441,66 @@
 
                                                         } 
 
-                                                        if($cp9['ID']==153 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        if($cp9['ID']==152 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
                                                             
-                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==144 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==152 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==153 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==158 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
                                                         }
 
 
-                                                        if($cp9['ID']!=153 && $cp9['ID']!=155 && $cp9['ID']!=157  && $cp9['ID']!=145 && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=152  && $cp9['ID']!=154  && $cp9['ID']!=156  && $cp9['ID']!=158) {
+                                                        if($cp9['ID']!=152 && $cp9['ID']!=154 && $cp9['ID']!=156  && $cp9['ID']!=144 && $cp9['ID']!=145  && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=153  && $cp9['ID']!=155  && $cp9['ID']!=157) {
 
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';    
 
@@ -5506,72 +5556,72 @@
                                                             
                                                         }
 
-                                                        if($cp9['ID']==153 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        if($cp9['ID']==152 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==144 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==152 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white;">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==153 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
 
-                                                        }elseif($cp9['ID']==158 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($sumaAcumul9,1).'%'.'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($promedio,1).'%'.'</td>';
@@ -5579,7 +5629,7 @@
                                                         }
 
 
-                                                        if($cp9['ID']!=153 && $cp9['ID']!=155 && $cp9['ID']!=157  && $cp9['ID']!=145 && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=152  && $cp9['ID']!=154  && $cp9['ID']!=156  && $cp9['ID']!=158) {
+                                                        if($cp9['ID']!=152 && $cp9['ID']!=154 && $cp9['ID']!=156  && $cp9['ID']!=144 && $cp9['ID']!=145  && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=153  && $cp9['ID']!=155  && $cp9['ID']!=157) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($promedio,0).'</td>';
@@ -5634,7 +5684,7 @@
                                                 ?>
                                             
                                                 <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">ACUMULADO</th>
-                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">PROMEDIO</th>
+                                                <th style="text-align: center; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; ">PROMEDIO POR MES</th>
                                                 
                                             </tr>
                                         </thead>
@@ -5649,7 +5699,7 @@
                                                 foreach(Cuerpo() as $cp9){
 
 
-                                                    if($cp9['ID'] >= 145 && $cp9['ID'] <= 158){
+                                                    if($cp9['ID'] >= 144 && $cp9['ID'] <= 157){
 
                                                         $sumaAcumul9=0;
 
@@ -5684,66 +5734,66 @@
 
                                                         } 
 
-                                                        if($cp9['ID']==153 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        if($cp9['ID']==152 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
                                                             
-                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
 
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==144 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==152 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==153 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
-                                                        }elseif($cp9['ID']==158 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';
 
                                                         }
 
 
-                                                        if($cp9['ID']!=153 && $cp9['ID']!=155 && $cp9['ID']!=157  && $cp9['ID']!=145 && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=152  && $cp9['ID']!=154  && $cp9['ID']!=156  && $cp9['ID']!=158) {
+                                                        if($cp9['ID']!=152 && $cp9['ID']!=154 && $cp9['ID']!=156  && $cp9['ID']!=144 && $cp9['ID']!=145  && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=153  && $cp9['ID']!=155  && $cp9['ID']!=157) {
 
                                                             echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($campos9,0).'</td>';    
 
@@ -5799,72 +5849,72 @@
                                                             
                                                         }
 
-                                                        if($cp9['ID']==153 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                        if($cp9['ID']==152 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
 
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==144 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==145 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==146 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==147 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==148 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==149 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                        }elseif($cp9['ID']==150 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==152 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==151 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white;">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==154 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==153 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==156 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==155 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
 
-                                                        }elseif($cp9['ID']==158 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                        }elseif($cp9['ID']==157 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                             
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
@@ -5872,7 +5922,7 @@
                                                         }
 
 
-                                                        if($cp9['ID']!=153 && $cp9['ID']!=155 && $cp9['ID']!=157  && $cp9['ID']!=145 && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=152  && $cp9['ID']!=154  && $cp9['ID']!=156  && $cp9['ID']!=158) {
+                                                        if($cp9['ID']!=152 && $cp9['ID']!=154 && $cp9['ID']!=156  && $cp9['ID']!=144 && $cp9['ID']!=145  && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=153  && $cp9['ID']!=155  && $cp9['ID']!=157) {
 
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($sumaAcumul9,0).'</td>';
                                                             echo '<td style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.round($promedio,0).'</td>';
@@ -7364,7 +7414,7 @@
                                                     foreach(Cuerpo() as $cp6){
 
 
-                                                        if($cp6['ID'] >= 86 && $cp6['ID'] <= 94){
+                                                        if($cp6['ID'] >= 86 && $cp6['ID'] <= 93){
 
                                                             $sumaAcumul6=0;
 
@@ -7401,7 +7451,7 @@
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campos6,0).'</td>';
                                                                 
-                                                            }elseif($cp6['ID']==94 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp6['ID']==93 && $cp6['campo']=='((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white; ">$'.number_format($campos6,0).'</td>';
 
@@ -7432,7 +7482,7 @@
                                                             }
 
 
-                                                            if($cp6['ID']!=89 && $cp6['ID']!=94 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
+                                                            if($cp6['ID']!=89 && $cp6['ID']!=93 && $cp6['ID']!=86  && $cp6['ID']!=87 && $cp6['ID']!=88  && $cp6['ID']!=90  && $cp6['ID']!=91  && $cp6['ID']!=92) {
 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 248px; background:white;  ">$'.number_format($campos4,0).'</td>';    
 
@@ -7593,7 +7643,7 @@
                                                     foreach(Cuerpo() as $cp7){
 
 
-                                                        if($cp7['ID'] >= 95 && $cp7['ID'] <= 110){
+                                                        if($cp7['ID'] >= 94 && $cp7['ID'] <= 109){
 
                                                             $sumaAcumul7=0;
 
@@ -7627,74 +7677,74 @@
 
                                                             }  */
 
-                                                            if($cp7['ID']==107 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            if($cp7['ID']==106 && $cp7['campo']=='(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
                                                                 
-                                                            }elseif($cp7['ID']==109 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                            }elseif($cp7['ID']==108 && $cp7['campo']=='(((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==95 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
+                                                            }elseif($cp7['ID']==94 && $cp7['campo']=='(ACEITES2/TON_ACEITES)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==96 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
+                                                            }elseif($cp7['ID']==95 && $cp7['campo']=='(((ACEITES2/TON_ACEITES)/(ACEITES/TON_ACEITES))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==97 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
+                                                            }elseif($cp7['ID']==96 && $cp7['campo']=='(MARGARINAS2/TON_MARGARINAS)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==98 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
+                                                            }elseif($cp7['ID']==97 && $cp7['campo']=='(((MARGARINAS2/TON_MARGARINAS)/(MARGARINAS/TON_MARGARINAS))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==99 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
+                                                            }elseif($cp7['ID']==98 && $cp7['campo']=='(SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==100 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
+                                                            }elseif($cp7['ID']==99 && $cp7['campo']=='(((SOLIDOS_CREMOSOS2/TON_SOLIDOS_CREMOSOS)/(SOLIDOS_CREMOSOS/TON_SOLIDOS_CREMOSOS))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==101 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
+                                                            }elseif($cp7['ID']==100 && $cp7['campo']=='(INDUSTRIALES2/TON_INDUSTRIALES_OLEO)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==102 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
+                                                            }elseif($cp7['ID']==101 && $cp7['campo']=='(((INDUSTRIALES2/TON_INDUSTRIALES_OLEO)/(INDUSTRIALES/TON_INDUSTRIALES_OLEO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==103 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
+                                                            }elseif($cp7['ID']==102 && $cp7['campo']=='(ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==104 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp7['ID']==103 && $cp7['campo']=='(((ACIDOS_GRASOS_ACIDULADO2/TON_ACIDOS_GRASOS_ACIDULADO)/(ACIDOS_GRASOS_ACIDULADO/TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==105 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
+                                                            }elseif($cp7['ID']==104 && $cp7['campo']=='(SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">$'.number_format($campos7,0).'</td>';
 
-                                                            }elseif($cp7['ID']==106 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
+                                                            }elseif($cp7['ID']==105 && $cp7['campo']=='(((SERVICIO_MAQUILA2/TON_SERVICIO_MAQUILA)/(SERVICIO_MAQUILA/TON_SERVICIO_MAQUILA))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==108 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp7['ID']==107 && $cp7['campo']=='((((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
-                                                            }elseif($cp7['ID']==110 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp7['ID']==109 && $cp7['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white;">'.number_format($campos7,1).'%'.'</td>';
 
                                                             }
 
 
-                                                            if($cp7['ID']!=107 && $cp7['ID']!=109 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=110 ) {
+                                                            if($cp7['ID']!=106 && $cp7['ID']!=108 && $cp7['ID']!=94 && $cp7['ID']!=95 && $cp7['ID']!=96 && $cp7['ID']!=97 && $cp7['ID']!=98 && $cp7['ID']!=99 && $cp7['ID']!=100 && $cp7['ID']!=101 && $cp7['ID']!=102 && $cp7['ID']!=103 && $cp7['ID']!=104 && $cp7['ID']!=105 && $cp7['ID']!=107 && $cp7['ID']!=109 ) {
 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 300px; background:white; ">$'.number_format($campos7,0).'</td>';    
 
@@ -7891,7 +7941,7 @@
                                                     foreach(Cuerpo() as $cp8){
 
 
-                                                        if($cp8['ID'] >= 111 && $cp8['ID'] <= 144){
+                                                        if($cp8['ID'] >= 110 && $cp8['ID'] <= 143){
 
                                                             $sumaAcumul8=0;
 
@@ -7925,146 +7975,146 @@
 
                                                             }  */
 
-                                                            if($cp8['ID']==111 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            if($cp8['ID']==110 && $cp8['campo']=='(GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;">$'.number_format($campos8,0).'</td>';
                                                                 
-                                                            }elseif($cp8['ID']==121 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==120 && $cp8['campo']=='(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==139 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==138 && $cp8['campo']=='(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==141 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                            }elseif($cp8['ID']==140 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==143 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                            }elseif($cp8['ID']==142 && $cp8['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==112 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==111 && $cp8['campo']=='((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==113 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==112 && $cp8['campo']=='(GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==114 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==113 && $cp8['campo']=='((GASTOS_PERSONAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==115 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==114 && $cp8['campo']=='(HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==116 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==115 && $cp8['campo']=='((HONORARIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==117 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==116 && $cp8['campo']=='(SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==118 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==117 && $cp8['campo']=='((SERVICIOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==119 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==118 && $cp8['campo']=='((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==120 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==119 && $cp8['campo']=='(((GASTOS_ADMINISTRACION-GASTOS_PERSONAL-HONORARIOS-SERVICIOS)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==122 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==121 && $cp8['campo']=='((GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==123 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==122 && $cp8['campo']=='(GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==124 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==123 && $cp8['campo']=='((GASTOS_PERSONAL2/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==125 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==124 && $cp8['campo']=='(POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==126 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==125 && $cp8['campo']=='((POLIZA_CARTERA/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==127 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==126 && $cp8['campo']=='(FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==128 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==127 && $cp8['campo']=='((FLETES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==129 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==128 && $cp8['campo']=='(SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==130 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==129 && $cp8['campo']=='((SERVICIO_LOGISTICO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==131 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==130 && $cp8['campo']=='(ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==132 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==131 && $cp8['campo']=='((ESTRATEGIA_COMERCIAL/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==133 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==132 && $cp8['campo']=='(IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==134 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==133 && $cp8['campo']=='((IMPUESTOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==135 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==134 && $cp8['campo']=='(DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==136 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==135 && $cp8['campo']=='((DES_PRONTO_PAGO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white;  ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==137 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp8['ID']==136 && $cp8['campo']=='((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';
 
-                                                            }elseif($cp8['ID']==138 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==137 && $cp8['campo']=='(((GASTOS_VENTAS-GASTOS_PERSONAL2-POLIZA_CARTERA-FLETES-SERVICIO_LOGISTICO-ESTRATEGIA_COMERCIAL-IMPUESTOS-DES_PRONTO_PAGO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==140 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==139 && $cp8['campo']=='((DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==142 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==140 && $cp8['campo']=='(((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
-                                                            }elseif($cp8['ID']==144 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp8['ID']==143 && $cp8['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">'.number_format($campos8,1).'%'.'</td>';
 
                                                             }
 
 
-                                                            if($cp8['ID']!=111 && $cp8['ID']!=121 && $cp8['ID']!=139  && $cp8['ID']!=141 && $cp8['ID']!=143  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=120  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=138  && $cp8['ID']!=140  && $cp8['ID']!=142  && $cp8['ID']!=144) {
+                                                            if($cp8['ID']!=110 && $cp8['ID']!=120 && $cp8['ID']!=138  && $cp8['ID']!=140 && $cp8['ID']!=142  && $cp8['ID']!=111  && $cp8['ID']!=112  && $cp8['ID']!=113  && $cp8['ID']!=114  && $cp8['ID']!=115  && $cp8['ID']!=116  && $cp8['ID']!=117  && $cp8['ID']!=118  && $cp8['ID']!=119  && $cp8['ID']!=121  && $cp8['ID']!=122  && $cp8['ID']!=123  && $cp8['ID']!=124  && $cp8['ID']!=125  && $cp8['ID']!=126  && $cp8['ID']!=127  && $cp8['ID']!=128  && $cp8['ID']!=129  && $cp8['ID']!=130  && $cp8['ID']!=131  && $cp8['ID']!=132  && $cp8['ID']!=133  && $cp8['ID']!=134  && $cp8['ID']!=135  && $cp8['ID']!=136  && $cp8['ID']!=137  && $cp8['ID']!=139  && $cp8['ID']!=140  && $cp8['ID']!=143) {
 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 385px; background:white; ">$'.number_format($campos8,0).'</td>';    
 
@@ -8353,7 +8403,7 @@
                                                     foreach(Cuerpo() as $cp9){
 
 
-                                                        if($cp9['ID'] >= 145 && $cp9['ID'] <= 158){
+                                                        if($cp9['ID'] >= 144 && $cp9['ID'] <= 157){
 
                                                             $sumaAcumul9=0;
 
@@ -8387,66 +8437,66 @@
 
                                                             }  */
 
-                                                            if($cp9['ID']==153 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
+                                                            if($cp9['ID']==152 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
                                                                 
-                                                            }elseif($cp9['ID']==155 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
+                                                            }elseif($cp9['ID']==154 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))'){
 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==157 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp9['ID']==156 && $cp9['campo']=='((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; font-weight:bold; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==145 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp9['ID']==144 && $cp9['campo']=='(FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==146 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==145 && $cp9['campo']=='((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==147 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp9['ID']==146 && $cp9['campo']=='(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==148 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==147 && $cp9['campo']=='((RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==149 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp9['ID']==148 && $cp9['campo']=='(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==150 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==149 && $cp9['campo']=='((GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==151 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
+                                                            }elseif($cp9['ID']==150 && $cp9['campo']=='((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';
 
-                                                            }elseif($cp9['ID']==152 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==151 && $cp9['campo']=='(((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==154 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==153 && $cp9['campo']=='(((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==156 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==155 && $cp9['campo']=='((((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))-(((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+SERVICIO_MAQUILA2+SERVICIO_MAQUILA2))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO)))-((GASTOS_ADMINISTRACION/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GASTOS_VENTAS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(DEPRECIACIONES_AMORTIZACIONES/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))-((FINANCIEROS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(RETIRO_ACTIVOS/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+(GRAVA_MOV_FINANCIERO/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))+((OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO)/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
-                                                            }elseif($cp9['ID']==158 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
+                                                            }elseif($cp9['ID']==157 && $cp9['campo']=='(((((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-((ACEITES2+MARGARINAS2+SOLIDOS_CREMOSOS2)+(INDUSTRIALES2+ACIDOS_GRASOS_ACIDULADO2+SERVICIO_MAQUILA2))-((GASTOS_ADMINISTRACION+GASTOS_VENTAS+DEPRECIACIONES_AMORTIZACIONES)))-(((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))))+((FINANCIEROS+RETIRO_ACTIVOS+GRAVA_MOV_FINANCIERO)+(OTROS-FINANCIEROS-RETIRO_ACTIVOS-GRAVA_MOV_FINANCIERO))+(DEPRECIACIONES_AMORTIZACIONES+EBITDA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))/((((ACEITES+MARGARINAS+SOLIDOS_CREMOSOS)+(INDUSTRIALES+ACIDOS_GRASOS_ACIDULADO+SERVICIO_MAQUILA))-(SERVICIO_MAQUILA))/(TON_ACEITES+TON_MARGARINAS+TON_SOLIDOS_CREMOSOS+TON_INDUSTRIALES_OLEO+TON_ACIDOS_GRASOS_ACIDULADO))*100)'){
                                                                 
                                                                 echo '<td id="fecha" style="text-align: right; position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">'.number_format($campos9,1).'%'.'</td>';
 
                                                             }
 
 
-                                                            if($cp9['ID']!=153 && $cp9['ID']!=155 && $cp9['ID']!=157  && $cp9['ID']!=145 && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=152  && $cp9['ID']!=154  && $cp9['ID']!=156  && $cp9['ID']!=158) {
+                                                            if($cp9['ID']!=152 && $cp9['ID']!=154 && $cp9['ID']!=156  && $cp9['ID']!=144 && $cp9['ID']!=145  && $cp9['ID']!=146  && $cp9['ID']!=147  && $cp9['ID']!=148  && $cp9['ID']!=149  && $cp9['ID']!=150  && $cp9['ID']!=151  && $cp9['ID']!=153  && $cp9['ID']!=155  && $cp9['ID']!=157) {
 
                                                                 echo '<td id="fecha" style="text-align: right;  position: -webkit-sticky;  white-space: nowrap; position: sticky; left: 420px; background:white; ">$'.number_format($campos9,0).'</td>';    
 
